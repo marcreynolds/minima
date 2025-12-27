@@ -1,3 +1,15 @@
+// Accept skin color variables as configuration from initialize.scss
+$brand-color:         #828282 !default;
+$brand-color-dimmed:  #525252 !default;
+$site-title-color:    #424242 !default;
+$text-color:          #111111 !default;
+$background-color:    #fdfdfd !default;
+$border-color-01:     #e8e8e8 !default;
+$border-color-02:     #e8e8e8 !default;
+$border-color-03:     #424242 !default;
+
+@use "variables" as *;
+
 /**
  * Site header
  */

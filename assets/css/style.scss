@@ -2,6 +2,24 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 
-@import
-  "minima/skins/{{ site.minima.skin | default: 'classic' }}",
-  "minima/initialize";
+@use "minima/skins/{{ site.minima.skin | default: 'classic' }}" as skin;
+@use "minima/initialize" with (
+  $brand-color:            skin.$brand-color,
+  $brand-color-dimmed:     skin.$brand-color-dimmed,
+  $site-title-color:       skin.$site-title-color,
+  $heading-color:          skin.$heading-color,
+  $text-color:             skin.$text-color,
+  $background-color:       skin.$background-color,
+  $code-background-color:  skin.$code-background-color,
+  $link-base-color:        skin.$link-base-color,
+  $link-visited-color:     skin.$link-visited-color,
+  $link-hover-color:       skin.$link-hover-color,
+  $border-color-01:        skin.$border-color-01,
+  $border-color-02:        skin.$border-color-02,
+  $border-color-03:        skin.$border-color-03,
+  $table-text-color:       skin.$table-text-color,
+  $table-border-color:     skin.$table-border-color,
+  $table-zebra-color:      skin.$table-zebra-color,
+  $table-header-bg-color:  skin.$table-header-bg-color,
+  $table-header-border:    skin.$table-header-border
+);

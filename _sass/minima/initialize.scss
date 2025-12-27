@@ -1,15 +1,68 @@
 @charset "utf-8";
 
 // Use the Sass module system to load and forward the variables module.
-@use "variables" as *;
-@forward "variables";        // Re-export variables for consumers
+@forward "variables";
 
-// Import style partials that need access to both layout variables and skin
-// color variables. These cannot be @forwarded as separate modules because
-// they need to share the global scope with the skin variables loaded in
-// style.scss.
-@import
-  "minima/custom-variables", // Hook to override predefined variables.
-  "minima/base",             // Defines element resets.
-  "minima/layout",           // Defines structure and style based on CSS selectors.
-  "minima/custom-styles";    // Hook to override existing styles.
+// Accept skin color variables as configuration parameters.
+// These are provided by the skin files and passed down to base/layout.
+$brand-color:            #828282 !default;
+$brand-color-dimmed:     #525252 !default;
+$site-title-color:       #424242 !default;
+$heading-color:          #111111 !default;
+$text-color:             #111111 !default;
+$background-color:       #fdfdfd !default;
+$code-background-color:  #f6f8fa !default;
+$link-base-color:        #2a7ae2 !default;
+$link-visited-color:     #1756a9 !default;
+$link-hover-color:       #111111 !default;
+$border-color-01:        #e8e8e8 !default;
+$border-color-02:        #e8e8e8 !default;
+$border-color-03:        #424242 !default;
+$table-text-color:       #111111 !default;
+$table-border-color:     #e8e8e8 !default;
+$table-zebra-color:      #f7f7f7 !default;
+$table-header-bg-color:  #f0f0f0 !default;
+$table-header-border:    #e0e0e0 !default;
+
+// Forward partials with skin color configuration.
+// Use "hide" to prevent skin variables from being re-exported (they're
+// internal to base/layout and would conflict if both exported them).
+@forward "custom-variables";
+@forward "base" hide $brand-color, $brand-color-dimmed, $site-title-color,
+    $heading-color, $text-color, $background-color, $code-background-color,
+    $link-base-color, $link-visited-color, $link-hover-color,
+    $border-color-01, $border-color-02, $border-color-03, $table-text-color,
+    $table-border-color, $table-zebra-color, $table-header-bg-color,
+    $table-header-border with (
+  $brand-color:            $brand-color,
+  $brand-color-dimmed:     $brand-color-dimmed,
+  $site-title-color:       $site-title-color,
+  $heading-color:          $heading-color,
+  $text-color:             $text-color,
+  $background-color:       $background-color,
+  $code-background-color:  $code-background-color,
+  $link-base-color:        $link-base-color,
+  $link-visited-color:     $link-visited-color,
+  $link-hover-color:       $link-hover-color,
+  $border-color-01:        $border-color-01,
+  $border-color-02:        $border-color-02,
+  $border-color-03:        $border-color-03,
+  $table-text-color:       $table-text-color,
+  $table-border-color:     $table-border-color,
+  $table-zebra-color:      $table-zebra-color,
+  $table-header-bg-color:  $table-header-bg-color,
+  $table-header-border:    $table-header-border
+);
+@forward "layout" hide $brand-color, $brand-color-dimmed, $site-title-color,
+    $text-color, $background-color, $border-color-01, $border-color-02,
+    $border-color-03 with (
+  $brand-color:         $brand-color,
+  $brand-color-dimmed:  $brand-color-dimmed,
+  $site-title-color:    $site-title-color,
+  $text-color:          $text-color,
+  $background-color:    $background-color,
+  $border-color-01:     $border-color-01,
+  $border-color-02:     $border-color-02,
+  $border-color-03:     $border-color-03
+);
+@forward "custom-styles";
